@@ -1,14 +1,179 @@
 [gd_scene format=3 uid="uid://dsyfep1odrxje"]
 
 [ext_resource type="PackedScene" uid="uid://ds60n6krsavle" path="res://scenes/Ground.tscn" id="1_elqb8"]
+[ext_resource type="Texture2D" uid="uid://62bcya7586ay" path="res://assets/background.jpg" id="1_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://c04n2ujx0g6vh" path="res://Player.tscn" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://bwxjvtqpr252y" path="res://scenes/SingleGround.tscn" id="3_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://c3mktc3lgc033" path="res://Zombie.tscn" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://b3j682spmxmg5" path="res://ObjectiveArea.tscn" id="6_jlsqs"]
+[ext_resource type="Script" uid="uid://cjvbqrc7pbxeo" path="res://scenes/CanvasLayer.gd" id="7_jlsqs"]
+[ext_resource type="FontFile" uid="uid://d0ce6s7vs6fhi" path="res://font/Gameplay.ttf" id="7_q8u5g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rarhs"]
+size = Vector2(76.5, 645.5)
+
+[sub_resource type="FontVariation" id="FontVariation_lhr70"]
+base_font = ExtResource("7_q8u5g")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wp0k4"]
+font = SubResource("FontVariation_lhr70")
+font_size = 61
+outline_color = Color(0.43137255, 1, 1, 1)
+shadow_size = 7
+
+[sub_resource type="FontVariation" id="FontVariation_nxtc6"]
+base_font = ExtResource("7_q8u5g")
+
+[sub_resource type="FontVariation" id="FontVariation_jlsqs"]
+base_font = ExtResource("7_q8u5g")
 
 [node name="Root" type="Node2D" unique_id=918599496]
 
+[node name="Background" type="Sprite2D" parent="." unique_id=1624878464]
+modulate = Color(0.58756685, 0.00027761818, 0.5952232, 1)
+position = Vector2(583, 308)
+scale = Vector2(0.29166666, 0.29166666)
+texture = ExtResource("1_nxtc6")
+
+[node name="Player" parent="." unique_id=604605366 instance=ExtResource("2_rvslj")]
+position = Vector2(38, 450)
+
+[node name="Zombie" parent="." unique_id=624531096 instance=ExtResource("4_rarhs")]
+position = Vector2(899, 494)
+
+[node name="Zombie2" parent="." unique_id=1505648146 instance=ExtResource("4_rarhs")]
+position = Vector2(-14, 96)
+
 [node name="Ground" parent="." unique_id=673580990 instance=ExtResource("1_elqb8")]
-position = Vector2(296, 324)
+position = Vector2(178, 536)
 
 [node name="Ground2" parent="." unique_id=1551337937 instance=ExtResource("1_elqb8")]
-position = Vector2(856, 324)
+position = Vector2(738, 536)
 
 [node name="Ground3" parent="." unique_id=1648397147 instance=ExtResource("1_elqb8")]
-position = Vector2(576, 394)
+position = Vector2(458, 606)
+
+[node name="Ground4" parent="." unique_id=344175832 instance=ExtResource("1_elqb8")]
+position = Vector2(1021, 607)
+
+[node name="Ground5" parent="." unique_id=1776716296 instance=ExtResource("1_elqb8")]
+position = Vector2(462, 372)
+
+[node name="Ground7" parent="." unique_id=1688312334 instance=ExtResource("1_elqb8")]
+position = Vector2(34, 211)
+
+[node name="Wall" parent="." unique_id=1292461180 instance=ExtResource("3_0bbpv")]
+position = Vector2(1095, 538)
+
+[node name="SingleGround" parent="Wall" unique_id=1157618908 instance=ExtResource("3_0bbpv")]
+position = Vector2(0, -70)
+
+[node name="SingleGround2" parent="Wall" unique_id=539309204 instance=ExtResource("3_0bbpv")]
+position = Vector2(0, -141)
+
+[node name="SingleGround3" parent="Wall" unique_id=1596109005 instance=ExtResource("3_0bbpv")]
+position = Vector2(0, -211)
+
+[node name="SingleGround4" parent="Wall" unique_id=940274161 instance=ExtResource("3_0bbpv")]
+position = Vector2(1, -273)
+
+[node name="SingleGround5" parent="Wall" unique_id=1265849856 instance=ExtResource("3_0bbpv")]
+position = Vector2(1, -343)
+
+[node name="SingleGround6" parent="Wall" unique_id=400180699 instance=ExtResource("3_0bbpv")]
+position = Vector2(1, -414)
+
+[node name="SingleGround" parent="." unique_id=134616661 instance=ExtResource("3_0bbpv")]
+position = Vector2(395, 210)
+
+[node name="SingleGround2" parent="." unique_id=1931675497 instance=ExtResource("3_0bbpv")]
+position = Vector2(765, 232)
+
+[node name="SingleGround2" parent="SingleGround2" unique_id=1443554432 instance=ExtResource("3_0bbpv")]
+position = Vector2(-729, -198)
+
+[node name="SingleGround3" parent="." unique_id=664670461 instance=ExtResource("3_0bbpv")]
+position = Vector2(1026, 125)
+
+[node name="Boundary" type="StaticBody2D" parent="." unique_id=1443929911]
+position = Vector2(2, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary" unique_id=1932028798]
+position = Vector2(-40.5, 328.5)
+shape = SubResource("RectangleShape2D_rarhs")
+
+[node name="Boundary2" type="StaticBody2D" parent="." unique_id=965049808]
+position = Vector2(4, -12)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary2" unique_id=1552021780]
+position = Vector2(-70.00003, -635)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_rarhs")
+
+[node name="ObjectiveArea" parent="." unique_id=53802008 instance=ExtResource("6_jlsqs")]
+position = Vector2(1091, 49)
+scale = Vector2(0.9, 0.9)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=752262930 groups=["WinMenu"]]
+process_mode = 3
+visible = false
+script = ExtResource("7_jlsqs")
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=880074172]
+offset_right = 1206.0
+offset_bottom = 657.0
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=93190866 groups=["WinText"]]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = -54.0
+offset_right = 131.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN!"
+label_settings = SubResource("LabelSettings_wp0k4")
+
+[node name="TryAgain" type="Button" parent="CanvasLayer" unique_id=1873669239]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -297.0
+offset_right = 128.0
+offset_bottom = -248.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_nxtc6")
+theme_override_font_sizes/font_size = 16
+text = "Try Again"
+
+[node name="Exit" type="Button" parent="CanvasLayer" unique_id=1671393682]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -139.0
+offset_top = -239.0
+offset_right = 129.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_jlsqs")
+theme_override_font_sizes/font_size = 16
+text = "Exit"
+
+[connection signal="pressed" from="CanvasLayer/TryAgain" to="CanvasLayer" method="_on_try_again_pressed"]
+[connection signal="pressed" from="CanvasLayer/Exit" to="CanvasLayer" method="_on_exit_pressed"]

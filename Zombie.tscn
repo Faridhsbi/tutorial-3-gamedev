@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c3mktc3lgc033"]
+
+[ext_resource type="Script" uid="uid://dchwquyqcpdt5" path="res://Zombie.gd" id="1_mauhj"]
+[ext_resource type="Texture2D" uid="uid://bvrk5ia7qa012" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk1.png" id="2_vrb4v"]
+[ext_resource type="Texture2D" uid="uid://jnt42t5uwigs" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk2.png" id="3_ykpkj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6hu2"]
+size = Vector2(67, 86)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dtdss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vrb4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ykpkj")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrb4v"]
+size = Vector2(74, 91.5)
+
+[node name="Zombie" type="CharacterBody2D" unique_id=624531096]
+script = ExtResource("1_mauhj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=946580145]
+position = Vector2(51.5, 35)
+shape = SubResource("RectangleShape2D_g6hu2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=747674659]
+position = Vector2(51, 24)
+sprite_frames = SubResource("SpriteFrames_dtdss")
+animation = &"walk"
+frame_progress = 0.34621376
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=2031833102]
+position = Vector2(51, 37)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1615203860]
+position = Vector2(0, -3.25)
+shape = SubResource("RectangleShape2D_vrb4v")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
