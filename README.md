@@ -36,7 +36,7 @@ Selain mekanik diatas, saya juga menambahkan beberapa fitur berikut:
 
 ### Implementasi Animasi Sprite
 * Node `Sprite2D` statis digantikan dengan `AnimatedSprite2D`. Saya mengimplementasikan sistem pergantian animasi sederhana berdasarkan status pergerakan vektor.
-* Karakter memiliki animasi "Idle", "Run", dan "Jump". Saya juga memodifikasi properti `flip_h` untuk membalikkan wajah *sprite* secara otomatis agar sesuai dengan arah vektor kecepatan (`velocity.x`).
+* Karakter memiliki animasi "Idle", "Walk", "Jump", dan "Dash". Saya juga memodifikasi properti `flip_h` untuk membalikkan wajah *sprite* secara otomatis agar sesuai dengan arah vektor kecepatan (`velocity.x`).
 
 ### Sistem Musuh (Zombie Patroling)
 * Saya membuat *scene* terpisah untuk musuh bertipe `CharacterBody2D` (Zombie) lengkap dengan animasinya.
@@ -62,3 +62,4 @@ Selain mekanik diatas, saya juga menambahkan beberapa fitur berikut:
 2. **Godot Docs - Using Area2D:** [https://docs.godotengine.org/en/stable/tutorials/physics/using_area_2d.html](https://docs.godotengine.org/en/stable/tutorials/physics/using_area_2d.html)
 3. **Godot Docs - Signals:** [https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html](https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html)
 4. **Godot Docs - Viewport and Canvas Transforms (UI):** [https://docs.godotengine.org/en/stable/tutorials/2d/2d_transforms.html](https://docs.godotengine.org/en/stable/tutorials/2d/2d_transforms.html)
+5. **Youtube - Godot 4 2D Sprite Animation Tutorial For Beginners** [https://youtu.be/gOSEdi6oBjQ?si=YK1YMIh_gpq5RBFI](https://youtu.be/gOSEdi6oBjQ?si=YK1YMIh_gpq5RBFI)
