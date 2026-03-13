@@ -6,9 +6,10 @@ extends CharacterBody2D
 @export var patrol_distance = 100.0 
 
 var direction = 1 # 1 : kanan, -1 : kiri
-var start_x = 0.0 # Variabel untuk mengingat posisi awal zombie
+var start_x = 0.0
 
 @onready var anim = $AnimatedSprite2D
+@onready var bite_sfx = $BiteSFX
 
 func _ready():
 	start_x = global_position.x
@@ -39,4 +40,5 @@ func _physics_process(delta):
 
 func _on_hitbox_body_entered(body):
 	if body.name == "Player":
+		bite_sfx.play()
 		body.respawn()

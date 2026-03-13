@@ -24,6 +24,10 @@ var spawn_point = Vector2.ZERO
 @onready var anim = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 
+@onready var jump_sfx = $JumpSFX
+@onready var dash_sfx = $DashSFX
+@onready var fall_sfx = $FallSFX
+
 func _ready():
 	spawn_point = global_position
 
@@ -38,13 +42,15 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_up") and jump_count < max_jumps:
 		velocity.y = jump_speed
 		jump_count += 1
+		jump_sfx.play()
 
-	#  DASHING 
+	# DASHING
 	if Input.is_action_just_pressed("ui_right"):
 		if Time.get_ticks_msec() - last_right_tap < double_tap_window:
 			is_dashing = true
 			dash_timer = dash_duration
 			dash_direction = 1
+			dash_sfx.play()
 		last_right_tap = Time.get_ticks_msec()
 
 	if Input.is_action_just_pressed("ui_left"):
@@ -52,6 +58,7 @@ func _physics_process(delta):
 			is_dashing = true
 			dash_timer = dash_duration
 			dash_direction = -1
+			dash_sfx.play()
 		last_left_tap = Time.get_ticks_msec()
 
 	if is_dashing:
@@ -65,7 +72,7 @@ func _physics_process(delta):
 	else:
 		# CROUCHING & NORMAL MOVEMENT
 		var current_speed = walk_speed
-		is_crouching = false # Selalu reset status jongkok setiap frame
+		is_crouching = false 
 		
 		if Input.is_action_pressed("ui_down") and is_on_floor():
 			is_crouching = true
@@ -92,8 +99,13 @@ func _physics_process(delta):
 	if not is_on_floor() and not is_dashing: 
 		anim.play("jump")
 
+	var was_in_air = not is_on_floor()
+
 	move_and_slide()
+
+	if was_in_air and is_on_floor():
+		fall_sfx.play()
 
 func respawn():
 	global_position = spawn_point
-	velocity = Vector2.ZERO #
+	velocity = Vector2.ZERO

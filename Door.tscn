@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bs8wprnysa7kl"]
+
+[ext_resource type="Script" uid="uid://cxnvch0btl31b" path="res://Door.gd" id="1_cuixy"]
+[ext_resource type="Texture2D" uid="uid://b2axdwk0o76e4" path="res://assets/doorClosed_mid.png" id="2_jbk66"]
+[ext_resource type="Texture2D" uid="uid://ccc7p86qhc7a" path="res://assets/doorOpen_mid.png" id="3_38qdo"]
+[ext_resource type="AudioStream" uid="uid://c1y17te1i24ju" path="res://assets/sounds/door_open.wav" id="4_38qdo"]
+[ext_resource type="AudioStream" uid="uid://ce0fl6hjknisu" path="res://assets/sounds/door_close.wav" id="5_r6baa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6baa"]
+size = Vector2(129.5, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuixy"]
+size = Vector2(128, 128)
+
+[node name="Door" type="StaticBody2D" unique_id=1523620578]
+script = ExtResource("1_cuixy")
+
+[node name="SpriteClosed" type="Sprite2D" parent="." unique_id=1547985321]
+texture = ExtResource("2_jbk66")
+
+[node name="SpriteOpen" type="Sprite2D" parent="." unique_id=166856737]
+visible = false
+texture = ExtResource("3_38qdo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=676462288]
+position = Vector2(0.25, 0)
+shape = SubResource("RectangleShape2D_r6baa")
+
+[node name="CrushArea" type="Area2D" parent="." unique_id=1935857459]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrushArea" unique_id=408182825]
+shape = SubResource("RectangleShape2D_cuixy")
+
+[node name="OpenSFX" type="AudioStreamPlayer2D" parent="." unique_id=1141463058]
+stream = ExtResource("4_38qdo")
+
+[node name="CloseSFX" type="AudioStreamPlayer2D" parent="." unique_id=104080594]
+stream = ExtResource("5_r6baa")

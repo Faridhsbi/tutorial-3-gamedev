@@ -9,9 +9,25 @@
 [ext_resource type="Texture2D" uid="uid://frwcqhlecb58" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_duck.png" id="6_l6ohk"]
 [ext_resource type="Texture2D" uid="uid://cpv0qxx81v0m3" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_walk1.png" id="7_oudfo"]
 [ext_resource type="Texture2D" uid="uid://c0oji5em2e0n2" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_walk2.png" id="8_d6rpx"]
+[ext_resource type="Texture2D" uid="uid://1xshihxylvkf" path="res://assets/kenney_platformercharacters/Vector/player_vector.svg" id="8_hp6x6"]
+[ext_resource type="AudioStream" uid="uid://cmea7w1ed7a18" path="res://assets/sounds/jump1.wav" id="11_oudfo"]
+[ext_resource type="AudioStream" uid="uid://ojpe68udativ" path="res://assets/sounds/dash.wav" id="12_d6rpx"]
+[ext_resource type="AudioStream" uid="uid://b3ove46c0y28c" path="res://assets/sounds/falling.wav" id="13_r3kul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnab6"]
-size = Vector2(68, 89)
+size = Vector2(64, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tkgg"]
+atlas = ExtResource("8_hp6x6")
+region = Rect2(240, 110, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ohk"]
+atlas = ExtResource("8_hp6x6")
+region = Rect2(0, 110, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oudfo"]
+atlas = ExtResource("8_hp6x6")
+region = Rect2(80, 110, 80, 110)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r3kul"]
 animations = [{
@@ -51,9 +67,23 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_wi0c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tkgg")
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6ohk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oudfo")
+}],
+"loop": true,
+"name": &"jalan_kanan",
 "speed": 5.0
 }, {
 "frames": [{
@@ -80,24 +110,31 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=604605366]
-position = Vector2(260, 400)
 script = ExtResource("1_kpjcp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1277562503]
-position = Vector2(2, 5.5)
+position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_nnab6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2134072892]
-position = Vector2(2, -4)
 sprite_frames = SubResource("SpriteFrames_r3kul")
-animation = &"crouch"
+animation = &"fall"
+autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=286534622]
-position = Vector2(2, 0)
 zoom = Vector2(1.5, 1.5)
-limit_left = 0
-limit_top = 0
+limit_left = -33
+limit_top = -37
 limit_right = 1130
-limit_bottom = 651
+limit_bottom = 614
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="." unique_id=487803101]
+stream = ExtResource("11_oudfo")
+
+[node name="DashSFX" type="AudioStreamPlayer2D" parent="." unique_id=1297157766]
+stream = ExtResource("12_d6rpx")
+
+[node name="FallSFX" type="AudioStreamPlayer2D" parent="." unique_id=1187906960]
+stream = ExtResource("13_r3kul")

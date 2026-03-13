@@ -1,20 +1,64 @@
 [gd_scene format=3 uid="uid://c3mktc3lgc033"]
 
 [ext_resource type="Script" uid="uid://dchwquyqcpdt5" path="res://Zombie.gd" id="1_mauhj"]
-[ext_resource type="Texture2D" uid="uid://bvrk5ia7qa012" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk1.png" id="2_vrb4v"]
-[ext_resource type="Texture2D" uid="uid://jnt42t5uwigs" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk2.png" id="3_ykpkj"]
+[ext_resource type="Texture2D" uid="uid://cd8yhkxlb3l3e" path="res://assets/frankenstein-sheet.png" id="2_ykpkj"]
+[ext_resource type="AudioStream" uid="uid://dnxry1meqwqac" path="res://assets/sounds/zombie_walk.wav" id="5_dtdss"]
+[ext_resource type="AudioStream" uid="uid://dx2dyoujbfxd2" path="res://assets/sounds/flesh-bite.wav" id="6_qybkj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6hu2"]
 size = Vector2(67, 86)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykpkj"]
+atlas = ExtResource("2_ykpkj")
+region = Rect2(0, 0, 142, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtdss"]
+atlas = ExtResource("2_ykpkj")
+region = Rect2(0, 195, 142, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qybkj"]
+atlas = ExtResource("2_ykpkj")
+region = Rect2(142, 195, 142, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mng7s"]
+atlas = ExtResource("2_ykpkj")
+region = Rect2(426, 195, 142, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djscl"]
+atlas = ExtResource("2_ykpkj")
+region = Rect2(568, 195, 142, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq0ii"]
+atlas = ExtResource("2_ykpkj")
+region = Rect2(852, 195, 142, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bep8f"]
+atlas = ExtResource("2_ykpkj")
+region = Rect2(994, 195, 142, 195)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dtdss"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_vrb4v")
+"texture": SubResource("AtlasTexture_ykpkj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_ykpkj")
+"texture": SubResource("AtlasTexture_dtdss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qybkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mng7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djscl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq0ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bep8f")
 }],
 "loop": true,
 "name": &"walk",
@@ -22,7 +66,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrb4v"]
-size = Vector2(74, 91.5)
+size = Vector2(74, 88.5)
 
 [node name="Zombie" type="CharacterBody2D" unique_id=624531096]
 script = ExtResource("1_mauhj")
@@ -32,16 +76,27 @@ position = Vector2(51.5, 35)
 shape = SubResource("RectangleShape2D_g6hu2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=747674659]
-position = Vector2(51, 24)
+position = Vector2(51.5, 29.059864)
+scale = Vector2(0.5140845, 0.5140845)
 sprite_frames = SubResource("SpriteFrames_dtdss")
 animation = &"walk"
-frame_progress = 0.34621376
+frame_progress = 0.82688874
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=2031833102]
 position = Vector2(51, 37)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1615203860]
-position = Vector2(0, -3.25)
+position = Vector2(0, -1.75)
 shape = SubResource("RectangleShape2D_vrb4v")
+
+[node name="WalkSFX" type="AudioStreamPlayer2D" parent="." unique_id=1305421446]
+stream = ExtResource("5_dtdss")
+volume_db = 0.5
+autoplay = true
+max_distance = 400.0
+attenuation = 1.5691688
+
+[node name="BiteSFX" type="AudioStreamPlayer2D" parent="." unique_id=1143811431]
+stream = ExtResource("6_qybkj")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

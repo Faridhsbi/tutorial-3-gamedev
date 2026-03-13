@@ -2,12 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://ds60n6krsavle" path="res://scenes/Ground.tscn" id="1_elqb8"]
 [ext_resource type="Texture2D" uid="uid://62bcya7586ay" path="res://assets/background.jpg" id="1_nxtc6"]
+[ext_resource type="AudioStream" uid="uid://b4i88lpr1rmp8" path="res://assets/sounds/backsound2.wav" id="2_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://c04n2ujx0g6vh" path="res://Player.tscn" id="2_rvslj"]
 [ext_resource type="PackedScene" uid="uid://bwxjvtqpr252y" path="res://scenes/SingleGround.tscn" id="3_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://c3mktc3lgc033" path="res://Zombie.tscn" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://b3j682spmxmg5" path="res://ObjectiveArea.tscn" id="6_jlsqs"]
 [ext_resource type="Script" uid="uid://cjvbqrc7pbxeo" path="res://scenes/CanvasLayer.gd" id="7_jlsqs"]
 [ext_resource type="FontFile" uid="uid://d0ce6s7vs6fhi" path="res://font/Gameplay.ttf" id="7_q8u5g"]
+[ext_resource type="PackedScene" uid="uid://bs8wprnysa7kl" path="res://Door.tscn" id="10_wp0k4"]
+[ext_resource type="PackedScene" uid="uid://cj00htub14cpb" path="res://Switch.tscn" id="11_bjd11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rarhs"]
 size = Vector2(76.5, 645.5)
@@ -35,14 +38,23 @@ position = Vector2(583, 308)
 scale = Vector2(0.29166666, 0.29166666)
 texture = ExtResource("1_nxtc6")
 
-[node name="Player" parent="." unique_id=604605366 instance=ExtResource("2_rvslj")]
-position = Vector2(38, 450)
+[node name="Backsound" type="AudioStreamPlayer2D" parent="." unique_id=1389283651]
+position = Vector2(10, 495)
+stream = ExtResource("2_q8u5g")
+volume_db = -12.428
+autoplay = true
+max_distance = 1000.0
+attenuation = 1.3928807
 
 [node name="Zombie" parent="." unique_id=624531096 instance=ExtResource("4_rarhs")]
 position = Vector2(899, 494)
 
 [node name="Zombie2" parent="." unique_id=1505648146 instance=ExtResource("4_rarhs")]
 position = Vector2(-14, 96)
+
+[node name="Door" parent="." unique_id=1523620578 instance=ExtResource("10_wp0k4")]
+position = Vector2(1023, 41)
+scale = Vector2(0.6242845, 0.7633313)
 
 [node name="Ground" parent="." unique_id=673580990 instance=ExtResource("1_elqb8")]
 position = Vector2(178, 536)
@@ -72,19 +84,22 @@ position = Vector2(0, -70)
 position = Vector2(0, -141)
 
 [node name="SingleGround3" parent="Wall" unique_id=1596109005 instance=ExtResource("3_0bbpv")]
-position = Vector2(0, -211)
+position = Vector2(2, -211)
 
 [node name="SingleGround4" parent="Wall" unique_id=940274161 instance=ExtResource("3_0bbpv")]
-position = Vector2(1, -273)
+position = Vector2(2, -279)
 
 [node name="SingleGround5" parent="Wall" unique_id=1265849856 instance=ExtResource("3_0bbpv")]
-position = Vector2(1, -343)
+position = Vector2(0, -345)
 
 [node name="SingleGround6" parent="Wall" unique_id=400180699 instance=ExtResource("3_0bbpv")]
 position = Vector2(1, -414)
 
 [node name="SingleGround" parent="." unique_id=134616661 instance=ExtResource("3_0bbpv")]
-position = Vector2(395, 210)
+position = Vector2(401, 210)
+
+[node name="SingleGround" parent="SingleGround" unique_id=588218035 instance=ExtResource("3_0bbpv")]
+position = Vector2(68, 0)
 
 [node name="SingleGround2" parent="." unique_id=1931675497 instance=ExtResource("3_0bbpv")]
 position = Vector2(765, 232)
@@ -93,13 +108,13 @@ position = Vector2(765, 232)
 position = Vector2(-729, -198)
 
 [node name="SingleGround3" parent="." unique_id=664670461 instance=ExtResource("3_0bbpv")]
-position = Vector2(1026, 125)
+position = Vector2(1026, 124)
 
 [node name="Boundary" type="StaticBody2D" parent="." unique_id=1443929911]
 position = Vector2(2, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary" unique_id=1932028798]
-position = Vector2(-40.5, 328.5)
+position = Vector2(-42, 327)
 shape = SubResource("RectangleShape2D_rarhs")
 
 [node name="Boundary2" type="StaticBody2D" parent="." unique_id=965049808]
@@ -112,7 +127,7 @@ scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_rarhs")
 
 [node name="ObjectiveArea" parent="." unique_id=53802008 instance=ExtResource("6_jlsqs")]
-position = Vector2(1091, 49)
+position = Vector2(1099, 53)
 scale = Vector2(0.9, 0.9)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=752262930 groups=["WinMenu"]]
@@ -175,5 +190,26 @@ theme_override_fonts/font = SubResource("FontVariation_jlsqs")
 theme_override_font_sizes/font_size = 16
 text = "Exit"
 
+[node name="Ground6" parent="." unique_id=1443043390 instance=ExtResource("1_elqb8")]
+position = Vector2(-173, 536)
+
+[node name="SingleGround4" parent="." unique_id=2022039532 instance=ExtResource("3_0bbpv")]
+position = Vector2(1026, 398)
+
+[node name="SingleGround5" parent="." unique_id=1783689673 instance=ExtResource("3_0bbpv")]
+position = Vector2(956, 123)
+
+[node name="Switch" parent="." unique_id=303517346 instance=ExtResource("11_bjd11")]
+position = Vector2(1025, 338)
+scale = Vector2(0.37969652, 0.37969652)
+
+[node name="Ground8" parent="." unique_id=486336129 instance=ExtResource("1_elqb8")]
+position = Vector2(1094, -42)
+
+[node name="Player" parent="." unique_id=604605366 instance=ExtResource("2_rvslj")]
+position = Vector2(38, 450)
+
 [connection signal="pressed" from="CanvasLayer/TryAgain" to="CanvasLayer" method="_on_try_again_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit" to="CanvasLayer" method="_on_exit_pressed"]
+[connection signal="door_triggered" from="Switch" to="Door" method="_on_switch_triggered"]
+[connection signal="door_triggered" from="Switch" to="Door" method="_on_switch_door_triggered"]

@@ -3,11 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://b68jl37at5b4g" path="res://assets/snow.png" id="1_1kkbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3755i"]
-size = Vector2(68, 68)
+size = Vector2(68, 70)
 
 [node name="SingleGround" type="StaticBody2D" unique_id=1157618908]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1250498002]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_3755i")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768231414]

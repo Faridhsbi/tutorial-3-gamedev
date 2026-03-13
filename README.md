@@ -1,3 +1,44 @@
+## Tutorial 5 - Assets Creation & Integration
+####  Nama: Muhammad Farid Hasabi
+#### NPM : 2306152512
+
+Pada tutorial ini, saya melakukan beberapa eksplorasi terhadap pembuatan dan integrasi aset 2D visual dan audio. Saya tidak hanya menggunakan aset bawaan, tetapi juga merancang mekanika interaksi objek baru yang menggabungkan manipulasi *physics*, sistem *Signal*, dan *Spatial Audio Feedback*.
+
+### Integrasi Custom Spritesheet
+* Mengganti objek musuh (*placeholder*) dengan aset visual yang teranimasi penuh menggunakan *spritesheet* kustom.
+* Saya menggunakan aset *spritesheet* karakter **Zombie Frankenstein**.
+	* Saya mengatur ulang parameter pembagian *grid* (horizontal dan vertikal) di dalam *node* `AnimatedSprite2D` untuk memotong *frame* dengan presisi.
+	* Logika kode ditambahkan untuk memutar animasi `walk` saat zombie melakukan patroli, serta mengubah orientasi wajah karakter (`flip_h`) secara dinamis berdasarkan vektor arah (`direction`).
+
+### Implementasi Sistem Audio (SFX & Spatial BGM)
+Saya mengimplementasikan sistem pembagian kelas audio berdasarkan urgensi kedekatan dengan pemain:
+* **Global SFX (`AudioStreamPlayer`):** Digunakan untuk efek suara yang harus selalu terdengar jelas tanpa terpengaruh posisi kamera. Diimplementasikan pada aksi *Player* seperti `Jump`, `Dash`, `Falling`, serta efek kekalahan (`Flesh-bite`) saat menabrak musuh.
+* **Spatial Audio (`AudioStreamPlayer2D`):** Digunakan untuk menciptakan kedalaman ruang (3D *feel* dalam 2D). 
+	* **BGM:** Diletakkan di titik awal (*spawn*) karakter. Suara musik latar akan memudar (*fade out*) secara eksponensial saat karakter berlari menjauhi titik awal menggunakan pengaturan `Max Distance` dan `Attenuation`.
+	* **Zombie Patrol:** Langkah kaki zombie menggunakan efek spasial, sehingga pemain bisa mendengar kehadiran musuh dari kejauhan sebelum melihatnya di layar.
+
+### Interaksi Objek dengan Timed Door Puzzle
+Saya juga merancang mekanika **Pintu Berwaktu** yang terdiri dari dua *scene* terpisah yang saling berkomunikasi:
+* **Switch (Tombol Injak - `Area2D`):** * Menggunakan `body_entered` untuk mendeteksi injakan pemain.
+	* Menghidupkan `Timer` (One-Shot) selama 5 detik dan memancarkan *Custom Signal* (`door_triggered`) yang membawa nilai boolean `true`.
+* **Door (Pintu Fisik - `StaticBody2D`):** * Menerima sinyal dari tombol. Jika `true`, *sprite* pintu terbuka dimunculkan, dan kotak kolisi (`CollisionShape2D`) dimatikan menggunakan `set_deferred("disabled", true)` agar tidak memicu konflik *physics engine*.
+* **Mekanik Terjepit pintu:** * Saya menambahkan sebuah sensor `Area2D` ekstra di tengah pintu. Saat *Timer* sudah habis dan pintu harus menutup kembali, pintu akan memanggil fungsi `get_overlapping_bodies()`.
+	* Jika karakter pemain masih berada di dalam area tersebut saat pintu menutup, pemain dinyatakan mati dan harus respawn lagi.
+
+### Audio Feedback pada Interaksi Objek
+Untuk meningkatkan *Game Feel*, setiap interaksi mekanika di atas dilengkapi dengan respons suara secara langsung:
+* Saat pemain menginjak Switch, SFX **Ticking Timer** (*tick-tock*) langsung diputar menggunakan `AudioStreamPlayer2D`.
+* Terdapat bunyi **Door Open** saat pintu bergeser terbuka, dan bunyi bantingan **Door Close** saat batas waktu 5 detik habis. Bunyi detak waktu juga langsung dihentikan (`stop()`) tepat saat pintu membanting tertutup.
+
+### Referensi Utama
+1.  **Godot Docs - AudioStreamPlayer2D:** [https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer2d.html](https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer2d.html)
+2.  **Godot Docs - Using Signals:** [https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html](https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html)
+3.  **Godot Docs - Area2D & Overlapping Bodies:** [https://docs.godotengine.org/en/stable/classes/class_area2d.html](https://docs.godotengine.org/en/stable/classes/class_area2d.html)
+4.  **Kenney Game Assets:** [https://kenney.nl/assets](https://kenney.nl/assets)
+5.  **Freesound.org:** [https://freesound.org/](https://freesound.org/)
+
+---
+
 # Tutorial 3 - Introduction to Game Programming with GDScript for Implementing Basic 2D Game Mechanics
 ####  Nama: Muhammad Farid Hasabi
 #### NPM : 2306152512
